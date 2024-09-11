@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrazek z zegarem i GIF-em</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        #zegar {
+            font-size: 36px;
+            font-family: Arial, sans-serif;
+            background-color: transparent;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: none;
+            margin-top: -2130px; /* Przesunięcie zegara wyżej */
+        }
+        #gif {
+            position: absolute; /* Umożliwia swobodne pozycjonowanie GIF-a */
+            top: 1960px; /* Wartość początkowa położenia od góry */
+            left: 108px; /* Wartość początkowa położenia od lewej */
+            width: 200px; /* Możesz ustawić odpowiednią szerokość GIF-a */
+            height: auto; /* Zachowaj proporcje GIF-a */
+        }
+    </style>
+</head>
+<body>
+    <img src="mobywatel2.0.png" alt="Opis obrazka">
+    <div id="zegar">
+        <span>Czas: </span><span id="czas"></span>
+    </div>
+
+    <!-- GIF -->
+    <img id="gif" src="mobywatel2.0.gif" alt="GIF">
+
+    <script>
+        function aktualizujZegar() {
+            const teraz = new Date();
+            const godzina = String(teraz.getHours()).padStart(2, '0');
+            const minuta = String(teraz.getMinutes()).padStart(2, '0');
+            const sekunda = String(teraz.getSeconds()).padStart(2, '0');
+            const dzien = String(teraz.getDate()).padStart(2, '0');
+            const miesiac = String(teraz.getMonth() + 1).padStart(2, '0');
+            const rok = teraz.getFullYear();
+
+            const czas = `${godzina}:${minuta}:${sekunda} ${dzien}.${miesiac}.${rok}`;
+            document.getElementById('czas').textContent = czas;
+        }
+
+        // Aktualizacja zegara co sekundę
+        setInterval(aktualizujZegar, 1000);
+        aktualizujZegar();
+    </script>
+</body>
+</html>
